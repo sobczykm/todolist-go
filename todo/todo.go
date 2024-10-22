@@ -1,4 +1,4 @@
-package main
+package todo
 
 import (
 	"errors"
@@ -28,7 +28,7 @@ func (todos *Todos) validateIndex(index int) error {
 	return nil
 }
 
-func (todos *Todos) add(name string) {
+func (todos *Todos) Add(name string) {
 	t := *todos
 	todo := Todo{
 		Name:        name,
@@ -40,7 +40,7 @@ func (todos *Todos) add(name string) {
 	*todos = append(t, todo)
 }
 
-func (todos *Todos) delete(index int) error {
+func (todos *Todos) Delete(index int) error {
 	t := *todos
 
 	err := t.validateIndex(index)
@@ -53,7 +53,7 @@ func (todos *Todos) delete(index int) error {
 	return nil
 }
 
-func (todos *Todos) toggle(index int) error {
+func (todos *Todos) Toggle(index int) error {
 	t := *todos
 
 	err := t.validateIndex(index)
@@ -75,7 +75,7 @@ func (todos *Todos) toggle(index int) error {
 	return nil
 }
 
-func (todos *Todos) update(index int, name string) error {
+func (todos *Todos) Update(index int, name string) error {
 	t := *todos
 
 	err := t.validateIndex(index)
@@ -88,7 +88,7 @@ func (todos *Todos) update(index int, name string) error {
 	return nil
 }
 
-func (todos *Todos) print() {
+func (todos *Todos) Print() {
 	table := table.New(os.Stdout)
 
 	table.SetHeaders("#No.", "Name", "Completed", "Completed At", "Created At")

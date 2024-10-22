@@ -1,9 +1,19 @@
 package main
 
+import (
+	"sobczyk.dev/todolist/storage"
+	"sobczyk.dev/todolist/todo"
+)
+
 func main() {
-	todos := Todos{}
-	todos.add("Buy Milk")
-	todos.add("Buy Bread")
-	todos.toggle(0)
-	todos.print()
+	todos := &todo.Todos{}
+	storage := storage.Init[todo.Todos]("todos.json")
+
+	defer storage.Save(todos)
+
+	storage.Load(todos)
+	todos.Add("Buy Milk")
+	todos.Add("Buy Bread")
+	todos.Toggle(0)
+	todos.Print()
 }
